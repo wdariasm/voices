@@ -1,0 +1,53 @@
+<div class="container-fluid" style="margin-top: 10px;">
+  <div class="row ">
+    <div class="col-md-10 offset-md-1 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          Mis Concursos
+          <button  type="button" class='btn btn-small btn-success float-right' id="btnAgregar" style="margin-left: 3%"
+             title="Crear concurso" (click) ="agregar()" >
+              Crear concurso
+          </button>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead  class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha Inicio</th>
+                <th scope="col">Fecha Fin</th>
+                <th scope="col">$ Premio</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listConcurso; let i = index">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.Nombre}}</td>
+                <td>{{item.Fecha_Inicio | date : 'dd/MM/yyyy'}}</td>
+                <td>{{item.Fecha_Fin | date : 'dd/MM/yyyy'}}</td>
+                <td>{{item.Premio | currency:"$"}}</td>
+                
+                <td>
+
+                    <button type="button" class='btn btn-small btn-info' id="btnVer" data-toggle="tooltip" data-placement="top" title="Ver Detalle" (click)="detalle(item.id)">
+                        <i class="fa fa-search"></i>
+                     </button>
+
+                    <button type="button" class='btn btn-small btn-success' id="btnEditar" style="margin-left: 3%" data-toggle="tooltip" data-placement="top" title="Editar" (click)="actualizar(item.id)">
+                        <i class="fa fa-pencil-alt"></i>
+                     </button>
+
+                     <button type="button" class='btn btn-small btn-danger' id="btnEliminar" style="margin-left: 3%" data-toggle="tooltip" data-placement="top" title="Eliminar" (click)="eliminar(item.id)">
+                        <i class="fa fa-trash"></i>
+                     </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<br />
+<div class="row ">
+  <div class="col-md-10 offset-md-1 col-sm-12">
+    <table class="table table-sm table-striped table-dark" [mfData]="listConcurso" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Fecha Fin</th>
+          <th scope="col">$ Premio</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mf.data; let i = index">
+          <td>{{item.Nombre}}</td>
+          <td>{{item.Fecha_Inicio | date : 'dd/MM/yyyy'}}</td>
+          <td>{{item.Fecha_Fin | date : 'dd/MM/yyyy'}}</td>
+          <td>{{item.Premio | currency:"$"}}</td>
+
+          <td>
+            <button type="button" class='btn btn-small btn-success' id="btnEditar" style="margin-left: 3%"
+              data-toggle="tooltip" data-placement="top" title="Participar" (click)="participar(item)">
+              <i class="fa fa-check"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <mfBootstrapPaginator [rowsOnPageSet]="[10]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-sm-12">
+    </div>
+    <div class="col-md-10 offset-md-1 col-sm-12">
+      <div class="card ">
+        <div class="card-header text-center ">
+          <strong> Detalle Concurso </strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-12 form-group">
+              <img style="max-height: 200px;"
+                [src]="concurso.Imagen || 'https://image.shutterstock.com/image-photo/wireless-microphone-computer-notebook-home-450w-1191098023.jpg'"
+                class="img-fluid" alt="Responsive image">
+            </div>
+
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="txtName">Nombre </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="inputGroupPrepend2"><i class="fas fa-file-signature"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="txtName" [(ngModel)]="concurso.Nombre"
+                    placeholder="Nombre" required [disabled]='!habilitarConcurso'>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="txtGuion">Guión</label>
+                <textarea class="form-control" rows="6" name="txtGuion" required [(ngModel)]="concurso.Guion"
+                  [disabled]='!habilitarConcurso'></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="txtRecomendaciones">Recomendaciones</label>
+                <textarea class="form-control" rows="3" name="txtRecomendaciones" required
+                  [(ngModel)]="concurso.Recomendaciones" [disabled]='!habilitarConcurso'></textarea>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <div class="form-group">
+                <label for="txtValor">Valor a Pagar </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="inputGroupPrepend2"><i class="fas fa-dollar-sign"></i></span>
+                  </div>
+                  <input type="number" class="form-control" name="txtValor" placeholder="Valor a pagar"
+                    [(ngModel)]="concurso.Premio" required [disabled]='!habilitarConcurso'>
+                </div>
+              </div>
+
+              <div class=" form-group">
+                <label for="txtStartDate">Fecha Inicio </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="inputGroupPrepend2"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="txtStartDate" placeholder="Fecha Inicio" required
+                    [disabled]='!habilitarConcurso' [(ngModel)]="concurso.Fecha_Inicio">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="txtEndDate">Fecha Finalización *</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text " id="inputGroupPrepend2"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="txtEndDate" placeholder="Fecha Fin" required
+                    [disabled]='!habilitarConcurso' [(ngModel)]="concurso.Fecha_Fin">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-md-10 offset-md-1 col-sm-12">
+      <br/> 
+    </div>
+
+    <div class="col-md-10 offset-md-1 col-sm-12">
+      <form #frmGrabacion="ngForm" ngNativeValidate (ngSubmit)="guardar(frmGrabacion)" enctype="multipart/form-data">
+        <div class="card ">
+          <div class="card-header text-center ">
+            <strong> Subir Narración </strong>
+          </div>
+          <div class="card-body">
+            <p class="card-text" float-right>Todos los campos marcados con (<strong style="color:red">*</strong>) son
+              requeridos.</p>
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <label for="txtName">Nombre *</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text " id="inputGroupPrepend2"><i
+                          class="fas fa-file-signature"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="txtName" [(ngModel)]="grabacion.Nombre_Autor"
+                      placeholder="Nombre" required [disabled]='!habilitarCampos'>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="txtApellidos">Apellidos *</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text " id="inputGroupPrepend2"><i class="fas fa-user-tag"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="txtApellidos" placeholder="Apellidos"
+                      [(ngModel)]="grabacion.Apellido_Autor" required [disabled]='!habilitarCampos'>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="txtEmail">Email *</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text " id="inputGroupPrepend2"><i class="fas fa-at"></i></span>
+                    </div>
+                    <input type="email" class="form-control" name="txtEmail" placeholder="Email"
+                      [(ngModel)]="grabacion.Mail_Autor" required [disabled]='!habilitarCampos'>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="flAudio">Seleccionar Archivo</label>
+                  <div class="custom-file">
+                    <input #fileMedia type="file" id="flAudio" class="custom-file-input" name="txtFile"
+                      aria-describedby="flAudio" accept="audio/*" [disabled]='!habilitarCampos'
+                      (change)="procesarAudio(fileMedia)" placeholder="Selecciones" required>
+                    <label class="custom-file-label" for="flAudio">Seleccione ....</label>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="form-group">
+                  <label for="txtRecomendaciones">Observaciones</label>
+                  <textarea class="form-control" rows="8" name="txtRecomendaciones"
+                    [(ngModel)]="grabacion.Observaciones" [disabled]='!habilitarCampos'></textarea>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <button type="reset" class="btn btn-danger " (click)="cancelar()"
+              style="margin-right: 3em;">Cancelar</button>
+            <button type="submit" class="btn btn-primary " [disabled]="!frmGrabacion.form.valid">Enviar Voz</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-listado-voces></app-listado-voces>
+</div>

@@ -1,0 +1,58 @@
+<div class="row" style="margin-top: 2%">
+  <div class="col-md-10 offset-md-1 col-sm-12">
+    <div class="card">
+      <div class="card-header text-center ">
+        <strong>Listado de voces</strong>
+
+      </div>
+      <div class="card-body">
+        <table class="table table-striped" [mfData]="listGrabaciones" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Locutor</th>
+              <th scope="col">Email</th>
+              <th scope="col">Fecha Publicacion</th>
+              <th scope="col">Estado</th>
+              <th *ngIf="esAdmin" scope="col" title="Voz ">Voz Ori.</th>
+              <th scope="col" title="Voz Convertida">Voz Conv.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of mf.data; let i = index">
+              <th scope="row">{{item.Nombre_Autor +  " " + item.Apellido_Autor}}</th>
+              <td>{{item.Mail_Autor}}</td>
+              <td>{{item.Fecha_Publicacion | date : 'dd/MM/yyyy'}}</td>
+              <td>{{ item.Estado_Archivo == 1 ? 'Convertida' : 'En Proceso' }}</td>
+              <td *ngIf="esAdmin">
+                <a target="_blank" class="btn btn-small btn-primary"
+                  href="{{ globalService.RutaVoces + item.Archivo_Original}}" data-toggle="tooltip" data-placement="top"
+                  title="Descargar" download>
+                  <i class="fas fa-cloud-download-alt"></i>
+                </a>
+              </td>
+              <td>
+                <div *ngIf="item.Estado_Archivo == 1">
+                  <a target="_blank" class="btn btn-small btn-primary"
+                    href="{{ globalService.RutaVoces + item.Archivo_Final}}" data-toggle="tooltip" data-placement="top"
+                    title="Reproducir">
+                    <i class="fas fa-play"></i>
+                  </a>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="6">
+                <mfBootstrapPaginator [rowsOnPageSet]="[10,25, 50]"></mfBootstrapPaginator>
+              </td>
+            </tr>
+          </tfoot>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
