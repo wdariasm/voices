@@ -1,4 +1,4 @@
-Django==2.1.5
+Django==2.2.13
 django-cors-headers==2.4.0
 django-cuser==2017.3.16
 django-rest-auth==0.9.3
